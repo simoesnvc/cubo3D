@@ -1,0 +1,14 @@
+/* XPM */
+static char *test_texture[] = {
+"8 8 2 1",
+"A c #FF0000",  // Red
+"B c #0000FF",  // Blue
+"ABABABAB",
+"BABABABA",
+"ABABABAB",
+"BABABABA",
+"ABABABAB",
+"BABABABA",
+"ABABABAB",
+"BABABABA"
+};
