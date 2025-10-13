@@ -25,9 +25,9 @@ SRCS =	main.c\
 		initialization.c\
 		validations/validate_args.c\
 		validations/validate_file.c\
+		validations/validate_map.c\
 		get_next_line/get_next_line.c\
 		get_next_line/get_next_line_utils.c\
-		fill_elements/fill_resolution.c\
 		fill_elements/fill_north.c\
 		fill_elements/fill_south.c\
 		fill_elements/fill_west.c\

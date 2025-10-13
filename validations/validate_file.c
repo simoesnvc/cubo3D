@@ -14,12 +14,7 @@
 
 static int	fill_var(char **element, t_game *game)
 {
-	if (ft_strcmp(element[0], "R") == 0)
-	{
-		if (fill_resolution(element, game) == -1)
-			return (-1);
-	}
-	else if (ft_strcmp(element[0], "NO") == 0)
+	if (ft_strcmp(element[0], "NO") == 0)
 	{
 		if (fill_north(element, game) == -1)
 			return (-1);
@@ -59,8 +54,7 @@ static int	fill_var(char **element, t_game *game)
 
 static int	is_filled(t_game *game)
 {
-	if ((game->R_x == -1) || (game->R_y == -1)
-		|| (game->NO == 0) || (game->SO == 0)
+	if ((game->NO == 0) || (game->SO == 0)
 		|| (game->WE == 0) || (game->EA == 0)
 		|| (game->S == 0) || (game->F_R == -1)
 		|| (game->F_G == -1) || (game->F_B == -1)
@@ -70,16 +64,30 @@ static int	is_filled(t_game *game)
 	return (0);
 }
 
+static int	check_if_map(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] == ' ')
+		i++;
+	if (line[i] == 0)
+		return (0);
+	if (line[i] == '1')
+		return (1);
+	return (0);
+}
+
 static int	check_and_fill_var(char *line, t_game *game)
 {
 	int	flag;
 	char	**element;
 
 	flag = is_filled(game);
-	if (line[0] == '1' && flag == 0)
+	if (check_if_map(line) == 1 && flag == 0)
 		return (1);
 	element = ft_split(line, ' ');
-	if (ft_strcmp(element[0], "R") == 0 || ft_strcmp(element[0], "NO") == 0
+	if (ft_strcmp(element[0], "NO") == 0
 		|| ft_strcmp(element[0], "SO") == 0 || ft_strcmp(element[0], "WE") == 0
 		|| ft_strcmp(element[0], "EA") == 0 || ft_strcmp(element[0], "S") == 0
 		|| ft_strcmp(element[0], "F") == 0 || ft_strcmp(element[0], "C") == 0)
@@ -97,7 +105,7 @@ static int	check_and_fill_var(char *line, t_game *game)
 
 static void	print_variables(t_game *game)
 {
-	printf("r_x:%d\nr_y:%d\nNO:%s\nSO:%s\nWE:%s\nEA:%s\nS:%s\nF_R:%d\nF_G:%d\nF_B:%d\nC_R:%d\nC_G:%d\nC_B:%d\nstart_x:%f\nstart_y:%f\nstart_orientation:%d\nn_items:%d\n", game->R_x, game->R_y, game->NO, game->SO, game->WE, game->EA, game->S, game->F_R, game->F_G, game->F_B, game->C_R, game->C_G, game->C_B, game->start_x, game->start_y, game->start_orientation, game->n_items);
+	printf("NO:%s\nSO:%s\nWE:%s\nEA:%s\nS:%s\nF_R:%d\nF_G:%d\nF_B:%d\nC_R:%d\nC_G:%d\nC_B:%d\nstart_x:%f\nstart_y:%f\nstart_orientation:%d\n",game->NO, game->SO, game->WE, game->EA, game->S, game->F_R, game->F_G, game->F_B, game->C_R, game->C_G, game->C_B, game->start_x, game->start_y, game->start_orientation);
 }
 
 static	void print_strs(char **map)
@@ -137,16 +145,20 @@ void	validate_file(char *file, t_game *game)
 	}
 	if (is_filled == 1)
 	{
-		//print_variables(game);
 		is_filled = fill_map(line, fd, game);
-		print_variables(game);
-		printf("is_filled:%d\n", is_filled);
-		//print_strs(game->map);
+		/* printf("is_filled:%d\n", is_filled);
+		print_strs(game->map); */
 		(void)print_strs;
-		//(void)print_variables;
+		print_variables(game);
+		if (is_filled != 1)
+		{
+			printf("failed\n");
+			//free stuff;
+			close(fd);
+			exit(4);
+		}
 	}
-	else
-		printf("error\n");
-	printf("\n");
+	printf("passed\n");
 	close(fd);
+	
 }

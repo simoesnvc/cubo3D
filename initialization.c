@@ -14,8 +14,6 @@
 
 void	init_struct(t_game	*game)
 {
-	game->R_x = -1;
-	game->R_y = -1;
 	game->NO = 0;
 	game->SO = 0;
 	game->WE = 0;
@@ -37,5 +35,4 @@ void	init_struct(t_game	*game)
 	game->start_x = -1;
 	game->start_y = -1;
 	game->start_orientation = 0;
-	game->n_items = 0;
 }

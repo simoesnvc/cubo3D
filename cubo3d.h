@@ -22,8 +22,6 @@
 
 typedef struct game
 {
-	int		R_x;
-	int		R_y;
 	char	*NO;
 	char	*SO;
 	char	*WE;
@@ -40,14 +38,12 @@ typedef struct game
 	double	start_x;
 	double	start_y;
 	char	start_orientation;
-	int		n_items;
 }	t_game;
 
 int		main(int argc, char **argv);
 void	validate_args(int argc, char **argv);
 void	init_struct(t_game	*game);
 void	validate_file(char *file, t_game *game);
-int		fill_resolution(char **element, t_game *game);
 int		fill_north(char **element, t_game *game);
 int		fill_south(char **element, t_game *game);
 int		fill_west(char **element, t_game *game);
@@ -56,4 +52,5 @@ int		fill_sprite(char **element, t_game *game);
 int		fill_floor(char **element, t_game *game);
 int		fill_ceilling(char **element, t_game *game);
 int		fill_map(char *line, int fd, t_game *game);
+int		validate_map(t_game *game);
 #endif
