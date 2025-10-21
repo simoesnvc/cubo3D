@@ -1,0 +1,14 @@
+/* XPM */
+static char *texture_stripes_by[] = {
+"8 8 2 1",
+"A c #0000FF",  // Blue
+"B c #FFFF00",  // Yellow
+"AAAAAAAA",
+"BBBBBBBB",
+"AAAAAAAA",
+"BBBBBBBB",
+"AAAAAAAA",
+"BBBBBBBB",
+"AAAAAAAA",
+"BBBBBBBB"
+};

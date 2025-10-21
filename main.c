@@ -20,12 +20,7 @@ int	main(int argc, char **argv)
 	game = malloc(sizeof(t_game));
 	init_struct(game);
 	validate_file(argv[1], game);
-	free (game->mlx);
-	free(game->NO);
-	free(game->SO);
-	free(game->WE);
-	free(game->EA);
-	free(game->S);
-	ft_freestrs(game->map);
-	free (game);
+	load_textures(game);
+	start_game(game);
+	free_all(game);
 }

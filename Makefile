@@ -32,10 +32,12 @@ SRCS =	main.c\
 		fill_elements/fill_south.c\
 		fill_elements/fill_west.c\
 		fill_elements/fill_east.c\
-		fill_elements/fill_sprite.c\
 		fill_elements/fill_floor.c\
 		fill_elements/fill_ceilling.c\
 		fill_map/fill_map.c\
+		game/start_game.c\
+		game/render.c\
+		game/render_utils.c\
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
@@ -44,7 +46,7 @@ $(NAME): $(OBJS)
 		make -C $(LIBFT_DIR)
 		cp libft/libft.a .
 	
-	$(CC) $(OBJS) $(LIBFT_DIR)/libft.a $(MLX_FLAGS) -o $(NAME)
+	$(CC) $(OBJS) $(LIBFT_DIR)/libft.a $(MLX_FLAGS) -lm -o $(NAME)
 
 all: $(NAME)
 

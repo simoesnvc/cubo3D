@@ -1,0 +1,14 @@
+/* XPM */
+static char *texture_cross[] = {
+"8 8 2 1",
+"A c #FFFFFF",  // White
+"B c #000000",  // Black
+"AAAABAAA",
+"AAAABAAA",
+"AAAABAAA",
+"BBBBBBBB",
+"AAAABAAA",
+"AAAABAAA",
+"AAAABAAA",
+"AAAABAAA"
+};
