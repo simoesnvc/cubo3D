@@ -16,17 +16,17 @@ int	fill_south(char **element, t_game *game)
 {
 	int	fd;
 
-	if (game->SO != 0)
+	if (game->so != 0)
 		return (-1);
 	if (element[1])
 	{
-		if(element[1][ft_strlen(element[1]) - 1] == '\n')
+		if (element[1][ft_strlen(element[1]) - 1] == '\n')
 			element[1][ft_strlen(element[1]) - 1] = 0;
 		fd = open(element[1], O_RDONLY);
 		if (fd < 0)
 			return (-1);
 		close(fd);
-		game->SO = ft_strdup(element[1]);
+		game->so = ft_strdup(element[1]);
 	}
 	else
 		return (-1);

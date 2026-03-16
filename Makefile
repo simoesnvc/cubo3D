@@ -26,6 +26,7 @@ SRCS =	main.c\
 		validations/validate_args.c\
 		validations/validate_file.c\
 		validations/validate_map.c\
+		validations/validate_file_utils.c\
 		get_next_line/get_next_line.c\
 		get_next_line/get_next_line_utils.c\
 		fill_elements/fill_north.c\
@@ -38,6 +39,9 @@ SRCS =	main.c\
 		game/start_game.c\
 		game/render.c\
 		game/render_utils.c\
+		game/moving.c\
+		game/rotating.c\
+		game/direction_start.c\
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)

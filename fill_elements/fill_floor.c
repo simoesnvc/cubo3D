@@ -12,70 +12,42 @@
 
 #include "../cubo3d.h"
 
+static int	parse_color_value(char **split, int index, int *color_value)
+{
+	int	color;
+
+	if (split[index])
+	{
+		color = ft_atoi(split[index]);
+		if (color >= 0 && color <= 255)
+		{
+			*color_value = color;
+			return (0);
+		}
+	}
+	return (-1);
+}
+
 int	fill_floor(char **element, t_game *game)
 {
-	int		R;
-	int		G;
-	int		B;
 	char	**split;
 
-	if (game->F_R != -1 || game->F_G != -1 || game->F_B != -1)
+	if (game->f_r != -1 || game->f_g != -1 || game->f_b != -1)
 		return (-1);
 	if (element[1])
 		split = ft_split(element[1], ',');
-	if (split[0])
+	if (parse_color_value(split, 0, &game->f_r) == -1
+		|| parse_color_value(split, 1, &game->f_g) == -1
+		|| parse_color_value(split, 2, &game->f_b) == -1)
 	{
-		R = ft_atoi(split[0]);
-		if (R >= 0 && R <= 255)
-			game->F_R = R;
-		else
-		{
-			ft_freestrs(split);
-			return (-1);
-		}
+		ft_freestrs(split);
+		return (-1);
 	}
-	else
-		{
-			ft_freestrs(split);
-			return (-1);
-		}
-	if (split[1])
+	if (split[3] != 0 || element[2] != 0)
 	{
-		G = ft_atoi(split[1]);
-		if (G >= 0 && G <= 255)
-			game->F_G = G;
-		else
-		{
-			ft_freestrs(split);
-			return (-1);
-		}
+		ft_freestrs(split);
+		return (-1);
 	}
-	else
-		{
-			ft_freestrs(split);
-			return (-1);
-		}
-	if (split[2])
-	{
-		B = ft_atoi(split[2]);
-		if (B >= 0 && B <= 255)
-			game->F_B = B;
-		else
-		{
-			ft_freestrs(split);
-			return (-1);
-		}
-	}
-	else
-		{
-			ft_freestrs(split);
-			return (-1);
-		}
-	if (split[3] != 0 || element[2] !=0)
-		{
-			ft_freestrs(split);
-			return (-1);
-		}
 	ft_freestrs(split);
 	return (0);
 }

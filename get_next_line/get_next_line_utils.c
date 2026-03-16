@@ -33,7 +33,7 @@ char	*ft_strhandle(char *str, char *txt)
 
 	line = (char *)malloc(ft_strlen(str) + ft_strlen(txt) + 1);
 	if (!line)
-		return (0); 
+		return (0);
 	i = 0;
 	while (str && str[i])
 	{

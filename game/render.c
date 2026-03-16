@@ -14,13 +14,13 @@
 
 static void	clear_image(t_game *game, t_img *img)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 	int		ceiling_color;
 	int		floor_color;
 
-	ceiling_color = (game->C_R << 16) | (game->C_G << 8) | game->C_B;
-	floor_color = (game->F_R << 16) | (game->F_G << 8) | game->F_B;
+	ceiling_color = (game->c_r << 16) | (game->c_g << 8) | game->c_b;
+	floor_color = (game->f_r << 16) | (game->f_g << 8) | game->f_b;
 	y = -1;
 	while (++y < HEIGHT)
 	{
@@ -46,8 +46,8 @@ static void	cast_all_rays(t_game *game)
 	while (x < WIDTH)
 	{
 		camera_x = (2.0 * x / WIDTH) - 1.0;
-		ray_dir_x = game->dir_x + game->planeX * camera_x;
-		ray_dir_y = game->dir_y + game->planeY * camera_x;
+		ray_dir_x = game->dir_x + game->planex * camera_x;
+		ray_dir_y = game->dir_y + game->planey * camera_x;
 		cast_single_ray(game, x, ray_dir_x, ray_dir_y);
 		x++;
 	}

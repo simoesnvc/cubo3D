@@ -1,7 +1,7 @@
-NO /home/vboxuser/Desktop/cubo3d/textures/texture_NO.xpm
-SO ./textures/texture_SO.xpm
-WE ./textures/texture_WE.xpm
-EA /home/vboxuser/Desktop/cubo3d/textures/texture_EA.xpm
+NO /home/vboxuser/Desktop/cubo3d/textures/ex2/texture_NO.xpm
+SO ./textures/ex2/texture_SO.xpm
+WE ./textures/ex2/texture_WE.xpm
+EA /home/vboxuser/Desktop/cubo3d/textures/ex2/texture_EA.xpm
 F 220,100,0
 C 100,30,0
 

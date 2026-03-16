@@ -1,0 +1,14 @@
+/* XPM */
+static char *texture_checkerboard[] = {
+"8 8 2 1",
+"A c 0xFF0000",  // Red color
+"B c 0x00FF00",  // Green color
+"ABABABAB",
+"BABABABA",
+"ABABABAB",
+"BABABABA",
+"ABABABAB",
+"BABABABA",
+"ABABABAB",
+"ABABABAB"
+};

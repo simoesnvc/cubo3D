@@ -16,17 +16,17 @@ int	fill_north(char **element, t_game *game)
 {
 	int	fd;
 
-	if (game->NO != 0)
+	if (game->no != 0)
 		return (-1);
 	if (element[1])
 	{
-		if(element[1][ft_strlen(element[1]) - 1] == '\n')
+		if (element[1][ft_strlen(element[1]) - 1] == '\n')
 			element[1][ft_strlen(element[1]) - 1] = 0;
 		fd = open(element[1], O_RDONLY);
 		if (fd < 0)
 			return (-1);
 		close(fd);
-		game->NO = ft_strdup(element[1]);
+		game->no = ft_strdup(element[1]);
 	}
 	else
 		return (-1);

@@ -1,34 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_north.c                                       :+:      :+:    :+:   */
+/*   direction_start.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdoutor- <jdoutor-@student.42lisboa.com>   #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-10-08 16:53:05 by jdoutor-          #+#    #+#             */
-/*   Updated: 2025-10-08 16:53:05 by jdoutor-         ###   ########.fr       */
+/*   Created: 2026-03-16 15:35:23 by jdoutor-          #+#    #+#             */
+/*   Updated: 2026-03-16 15:35:23 by jdoutor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cubo3d.h"
 
-int	fill_west(char **element, t_game *game)
+void	north(t_game *game)
 {
-	int	fd;
+	game->dir_x = 0;
+	game->dir_y = -1;
+	game->planex = FOV;
+	game->planey = 0;
+}
 
-	if (game->we != 0)
-		return (-1);
-	if (element[1])
-	{
-		if (element[1][ft_strlen(element[1]) - 1] == '\n')
-			element[1][ft_strlen(element[1]) - 1] = 0;
-		fd = open(element[1], O_RDONLY);
-		if (fd < 0)
-			return (-1);
-		close(fd);
-		game->we = ft_strdup(element[1]);
-	}
-	else
-		return (-1);
-	return (0);
+void	south(t_game *game)
+{
+	game->dir_x = 0;
+	game->dir_y = 1;
+	game->planex = -FOV;
+	game->planey = 0;
+}
+
+void	east(t_game *game)
+{
+	game->dir_x = 1;
+	game->dir_y = 0;
+	game->planex = 0;
+	game->planey = FOV;
+}
+
+void	west(t_game *game)
+{
+	game->dir_x = -1;
+	game->dir_y = 0;
+	game->planex = 0;
+	game->planey = -FOV;
 }

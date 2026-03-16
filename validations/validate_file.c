@@ -29,31 +29,18 @@ static int	fill_var(char **element, t_game *game)
 		if (fill_west(element, game) == -1)
 			return (-1);
 	}
-	else if (ft_strcmp(element[0], "EA") == 0)
-	{
-		if (fill_east(element, game) == -1)
-			return (-1);
-	}
-	else if (ft_strcmp(element[0], "F") == 0)
-	{
-		if (fill_floor(element, game) == -1)
-			return (-1);
-	}
-		else if (ft_strcmp(element[0], "C") == 0)
-	{
-		if (fill_ceilling(element, game) == -1)
-			return (-1);
-	}
+	else
+		return (fill_var_cont(element, game));
 	return (0);
 }
 
 static int	is_filled(t_game *game)
 {
-	if ((game->NO == 0) || (game->SO == 0)
-		|| (game->WE == 0) || (game->EA == 0)
-		|| (game->F_R == -1) || (game->F_G == -1)
-		|| (game->F_B == -1) || (game->C_R == -1)
-		|| (game->C_G == -1) || (game->C_B == -1))
+	if ((game->no == 0) || (game->so == 0)
+		|| (game->we == 0) || (game->ea == 0)
+		|| (game->f_r == -1) || (game->f_g == -1)
+		|| (game->f_b == -1) || (game->c_r == -1)
+		|| (game->c_g == -1) || (game->c_b == -1))
 		return (-1);
 	return (0);
 }
@@ -74,7 +61,7 @@ static int	check_if_map(char *line)
 
 static int	check_and_fill_var(char *line, t_game *game)
 {
-	int	flag;
+	int		flag;
 	char	**element;
 
 	flag = is_filled(game);
@@ -83,7 +70,7 @@ static int	check_and_fill_var(char *line, t_game *game)
 	element = ft_split(line, ' ');
 	if (ft_strcmp(element[0], "NO") == 0
 		|| ft_strcmp(element[0], "SO") == 0 || ft_strcmp(element[0], "WE") == 0
-		|| ft_strcmp(element[0], "EA") == 0	|| ft_strcmp(element[0], "F") == 0
+		|| ft_strcmp(element[0], "EA") == 0 || ft_strcmp(element[0], "F") == 0
 		|| ft_strcmp(element[0], "C") == 0)
 	{
 		flag = fill_var(element, game);
@@ -121,15 +108,5 @@ void	validate_file(char *file, t_game *game)
 			free (line);
 	}
 	if (is_filled == 1)
-	{
-		is_filled = fill_map(line, fd, game);
-		if (is_filled != 1)
-		{
-			printf("Error in validation\n");
-			close(fd);
-			exit(5);
-		}
-	}
-	printf("passed\n");
-	close(fd);
+		ready_to_fill(fd, line, game);
 }

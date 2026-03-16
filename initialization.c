@@ -26,10 +26,10 @@ void	free_all(t_game *game)
 		mlx_destroy_image(game->mlx, game->screen.img);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
-	free(game->NO);
-	free(game->SO);
-	free(game->WE);
-	free(game->EA);
+	free(game->no);
+	free(game->so);
+	free(game->we);
+	free(game->ea);
 	ft_freestrs(game->map);
 	free(game);
 }
@@ -41,25 +41,55 @@ static void	fill_textures(t_game *game)
 	i = -1;
 	while (++i < 4)
 	{
+		if (game->textures[i].img == NULL)
+		{
+			printf("Texture %d not loaded properly!\n", i);
+			exit(7);
+		}
 		game->textures[i].addr = mlx_get_data_addr(game->textures[i].img,
-		&game->textures[i].bpp,
-		&game->textures[i].line_length,
-		&game->textures[i].endian);
+				&game->textures[i].bpp,
+				&game->textures[i].line_length,
+				&game->textures[i].endian);
 	}
 }
 
 void	load_textures(t_game *game)
 {
-	game->textures[NORTH].img = mlx_xpm_file_to_image(game->mlx, game->NO,
-		&game->textures[NORTH].width, &game->textures[NORTH].height);
-	game->textures[SOUTH].img = mlx_xpm_file_to_image(game->mlx, game->SO,
-		&game->textures[SOUTH].width, &game->textures[SOUTH].height);
-	game->textures[WEST].img = mlx_xpm_file_to_image(game->mlx, game->WE,
-		&game->textures[WEST].width, &game->textures[WEST].height);
-	game->textures[EAST].img = mlx_xpm_file_to_image(game->mlx, game->EA,
-		&game->textures[EAST].width, &game->textures[EAST].height);
+	if (!game->no || !game->so || !game->we || !game->ea)
+	{
+		printf("Error: One or more texture paths are NULL or empty.\n");
+		exit(7);
+	}
+	game->textures[NORTH].img = mlx_xpm_file_to_image(game->mlx, game->no,
+			&game->textures[NORTH].width, &game->textures[NORTH].height);
+	if (!game->textures[NORTH].img)
+	{
+		printf("Error loading texture: %s\n", game->no);
+		exit(7);
+	}
+	game->textures[SOUTH].img = mlx_xpm_file_to_image(game->mlx, game->so,
+			&game->textures[SOUTH].width, &game->textures[SOUTH].height);
+	if (!game->textures[SOUTH].img)
+	{
+		printf("Error loading texture: %s\n", game->so);
+		exit(7);
+	}
+	game->textures[WEST].img = mlx_xpm_file_to_image(game->mlx, game->we,
+			&game->textures[WEST].width, &game->textures[WEST].height);
+	if (!game->textures[WEST].img)
+	{
+		printf("Error loading texture: %s\n", game->we);
+		exit(7);
+	}
+	game->textures[EAST].img = mlx_xpm_file_to_image(game->mlx, game->ea,
+			&game->textures[EAST].width, &game->textures[EAST].height);
+	if (!game->textures[EAST].img)
+	{
+		printf("Error loading texture: %s\n", game->ea);
+		exit(7);
+	}
 	if (!game->textures[NORTH].img || !game->textures[SOUTH].img
-	|| !game->textures[WEST].img || !game->textures[EAST].img)
+		|| !game->textures[WEST].img || !game->textures[EAST].img)
 	{
 		printf("Failed to load texture\n");
 		free_all(game);
@@ -83,34 +113,37 @@ void	init_mlx(t_game *game)
 		exit(6);
 	}
 	mlx_hook(game->win, 17, 0, exit_game, game);
-	mlx_hook(game->win, 2, 1L<<0, key_input, game);
+	mlx_hook(game->win, 2, 1L << 0, key_input, game);
 	game->screen.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
-	game->screen.addr = mlx_get_data_addr(game->screen.img, &game->screen.bpp, &game->screen.line_length, &game->screen.endian);
+	game->screen.addr = mlx_get_data_addr(game->screen.img,
+			&game->screen.bpp, &game->screen.line_length, &game->screen.endian);
 }
 
 void	init_struct(t_game	*game)
 {
-	game->NO = 0;
-	game->SO = 0;
-	game->WE = 0;
-	game->EA = 0;
-	game->F_R = -1;
-	game->F_G = -1;
-	game->F_B = -1;
-	game->C_R = -1;
-	game->C_G = -1;
-	game->C_B = -1;
+	game->no = 0;
+	game->so = 0;
+	game->we = 0;
+	game->ea = 0;
+	game->f_r = -1;
+	game->f_g = -1;
+	game->f_b = -1;
+	game->c_r = -1;
+	game->c_g = -1;
+	game->c_b = -1;
 	game->map = 0;
 	game->start_x = -1;
 	game->start_y = -1;
 	game->start_orientation = 0;
+	game->mlx = NULL;
+	game->win = NULL;
 	init_mlx(game);
-	game->posX = -1;
-	game->posY = -1;
+	game->posx = -1;
+	game->posy = -1;
 	game->move_speed = 0.05;
 	game->rot_speed = 0.04;
 	game->dir_x = -1;
 	game->dir_y = -1;
-	game->planeX = -1;
-	game->planeY = -1;
+	game->planex = -1;
+	game->planey = -1;
 }

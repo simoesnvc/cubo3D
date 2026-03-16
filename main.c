@@ -18,6 +18,8 @@ int	main(int argc, char **argv)
 
 	validate_args(argc, argv);
 	game = malloc(sizeof(t_game));
+	if (!game)
+		return (0);
 	init_struct(game);
 	validate_file(argv[1], game);
 	load_textures(game);

@@ -16,17 +16,17 @@ int	fill_east(char **element, t_game *game)
 {
 	int	fd;
 
-	if (game->EA != 0)
+	if (game->ea != 0)
 		return (-1);
 	if (element[1])
 	{
-		if(element[1][ft_strlen(element[1]) - 1] == '\n')
+		if (element[1][ft_strlen(element[1]) - 1] == '\n')
 			element[1][ft_strlen(element[1]) - 1] = 0;
 		fd = open(element[1], O_RDONLY);
 		if (fd < 0)
 			return (-1);
 		close(fd);
-		game->EA = ft_strdup(element[1]);
+		game->ea = ft_strdup(element[1]);
 	}
 	else
 		return (-1);

@@ -1,12 +1,12 @@
-NO /home/vboxuser/Desktop/cubo3d/textures/texture_NO.xpm
-SO ./textures/texture_SO.xpm
-WE ./textures/texture_WE.xpm
-EA /home/vboxuser/Desktop/cubo3d/textures/texture_EA.xpm
+NO /home/vboxuser/Desktop/cubo3d/textures/ex1/texture_NO.xpm
+SO ./textures/ex1/texture_SO.xpm
+WE ./textures/ex1/texture_WE.xpm
+EA /home/vboxuser/Desktop/cubo3d/textures/ex1/texture_EA.xpm
 F 220,100,0
-C 0,0,0
+C 55,99,200
 
 1111111111111
 1001011
-101001
+100001
 1100N1
 111111
