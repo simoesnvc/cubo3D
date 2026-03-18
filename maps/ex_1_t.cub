@@ -3,10 +3,10 @@ SO ./textures/ex1/texture_SO.xpm
 WE ./textures/ex1/texture_WE.xpm
 EA ./textures/ex1/texture_EA.xpm
 F 220,100,0
-C 55,99,200
+C 55,99,199
 
 1111111111111
 1001011
-100001
-1100N1
+1000101
+11000S1
 111111

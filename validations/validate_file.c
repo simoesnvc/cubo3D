@@ -94,7 +94,7 @@ void	validate_file(char *file, t_game *game)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
-		printf("Error opening file.\n");
+		free_all(game);
 		exit(3);
 	}
 	while (is_filled == 0)
@@ -109,4 +109,6 @@ void	validate_file(char *file, t_game *game)
 	}
 	if (is_filled == 1)
 		ready_to_fill(fd, line, game);
+	else
+		not_filled_close(fd, game);
 }

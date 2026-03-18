@@ -15,38 +15,12 @@
 static int	check_walls(t_game *game)
 {
 	int	i;
-	int	y;
 
-	i = 0;
-	y = 0;
-	while (game->map[0][y] != '\n' && game->map[0][y] != 0)
-	{
-		if ((game->map[0][y] != '1') && (game->map[0][y] != ' '))
-			return (-1);
-		y++;
-	}
-	while (game->map[i] != 0 && game->map[i][0] != '\n' && game->map[i][0] != 0)
-	{
-		if (game->map[i][0] != '1' && game->map[i][0] != ' ')
-			return (-1);
-		i++;
-	}
-	y = 0;
-	i--;
-	while (game->map[i][y] != '\n' && game->map[i][y] != 0)
-	{
-		if (game->map[i][y] != '1' && game->map[i][y] != ' ')
-			return (-1);
-		y++;
-	}
-	i--;
-	while (i >= 0)
-	{
-		if (game->map[i][ft_strlen(game->map[i]) - 2] != '1' &&
-				game->map[i][ft_strlen(game->map[i]) - 2] != ' ')
-			return (-1);
-		i--;
-	}
+	i = check_top_left_walls(game);
+	if (i == -1)
+		return (-1);
+	if (check_bottom_right_walls(game, i) == -1)
+		return (-1);
 	return (0);
 }
 
@@ -125,5 +99,5 @@ int	validate_map(t_game *game)
 		}
 		i++;
 	}
-	return (1);
+	return (no_start(game));
 }

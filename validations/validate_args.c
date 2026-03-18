@@ -12,6 +12,13 @@
 
 #include "../cubo3d.h"
 
+int	no_start(t_game *game)
+{
+	if (game->start_orientation == 0)
+		return (-1);
+	return (1);
+}
+
 static int	valid_map_name(char *argv)
 {
 	int	i;

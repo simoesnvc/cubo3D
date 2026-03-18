@@ -145,4 +145,8 @@ void	west(t_game *game);
 int		fill_var_cont(char **element, t_game *game);
 void	ready_to_fill(int fd, char *line, t_game *game);
 void	load_one_texture(t_game *game, int dir, char *path);
+int		check_top_left_walls(t_game *game);
+int		check_bottom_right_walls(t_game *game, int i);
+void	not_filled_close(int fd, t_game *game);
+int		no_start(t_game *game);
 #endif

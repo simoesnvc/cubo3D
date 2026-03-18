@@ -74,6 +74,9 @@ void	load_textures(t_game *game)
 
 void	init_mlx(t_game *game)
 {
+	int	i;
+
+	i = -1;
 	game->mlx = mlx_init();
 	if (!game->mlx)
 	{
@@ -91,6 +94,8 @@ void	init_mlx(t_game *game)
 	game->screen.img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
 	game->screen.addr = mlx_get_data_addr(game->screen.img,
 			&game->screen.bpp, &game->screen.line_length, &game->screen.endian);
+	while (++i < 4)
+		game->textures[i].img = NULL;
 }
 
 void	init_struct(t_game	*game)
