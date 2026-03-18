@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialization.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdoutor- <jdoutor-@student.42lisboa.com>   #+#  +:+       +#+        */
+/*   By: aralves- <aralves-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-10-06 14:26:58 by jdoutor-          #+#    #+#             */
-/*   Updated: 2025-10-06 14:26:58 by jdoutor-         ###   ########.fr       */
+/*   Created: 2025/10/06 14:26:58 by jdoutor-          #+#    #+#             */
+/*   Updated: 2026/03/18 01:20:20 by aralves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	free_all(t_game *game)
 	free(game->we);
 	free(game->ea);
 	ft_freestrs(game->map);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
 	free(game);
 }
 
@@ -55,46 +57,18 @@ static void	fill_textures(t_game *game)
 
 void	load_textures(t_game *game)
 {
+	char	*paths[4];
+	int		i;
+
 	if (!game->no || !game->so || !game->we || !game->ea)
-	{
-		printf("Error: One or more texture paths are NULL or empty.\n");
-		exit(7);
-	}
-	game->textures[NORTH].img = mlx_xpm_file_to_image(game->mlx, game->no,
-			&game->textures[NORTH].width, &game->textures[NORTH].height);
-	if (!game->textures[NORTH].img)
-	{
-		printf("Error loading texture: %s\n", game->no);
-		exit(7);
-	}
-	game->textures[SOUTH].img = mlx_xpm_file_to_image(game->mlx, game->so,
-			&game->textures[SOUTH].width, &game->textures[SOUTH].height);
-	if (!game->textures[SOUTH].img)
-	{
-		printf("Error loading texture: %s\n", game->so);
-		exit(7);
-	}
-	game->textures[WEST].img = mlx_xpm_file_to_image(game->mlx, game->we,
-			&game->textures[WEST].width, &game->textures[WEST].height);
-	if (!game->textures[WEST].img)
-	{
-		printf("Error loading texture: %s\n", game->we);
-		exit(7);
-	}
-	game->textures[EAST].img = mlx_xpm_file_to_image(game->mlx, game->ea,
-			&game->textures[EAST].width, &game->textures[EAST].height);
-	if (!game->textures[EAST].img)
-	{
-		printf("Error loading texture: %s\n", game->ea);
-		exit(7);
-	}
-	if (!game->textures[NORTH].img || !game->textures[SOUTH].img
-		|| !game->textures[WEST].img || !game->textures[EAST].img)
-	{
-		printf("Failed to load texture\n");
-		free_all(game);
-		exit(7);
-	}
+		return (printf("Error: missing texture path\n"), exit(7));
+	paths[NORTH] = game->no;
+	paths[SOUTH] = game->so;
+	paths[WEST] = game->we;
+	paths[EAST] = game->ea;
+	i = -1;
+	while (++i < 4)
+		load_one_texture(game, i, paths[i]);
 	fill_textures(game);
 }
 
@@ -137,7 +111,6 @@ void	init_struct(t_game	*game)
 	game->start_orientation = 0;
 	game->mlx = NULL;
 	game->win = NULL;
-	init_mlx(game);
 	game->posx = -1;
 	game->posy = -1;
 	game->move_speed = 0.05;
@@ -146,4 +119,5 @@ void	init_struct(t_game	*game)
 	game->dir_y = -1;
 	game->planex = -1;
 	game->planey = -1;
+	init_mlx(game);
 }

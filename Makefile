@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdoutor- <jdoutor-@student.42lisboa.com>   #+#  +:+       +#+         #
+#    By: aralves- <aralves-@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024-12-02 14:26:41 by jdoutor-          #+#    #+#              #
-#    Updated: 2024-12-02 14:26:41 by jdoutor-         ###   ########42lisboa   #
+#    Created: 2024/12/02 14:26:41 by jdoutor-          #+#    #+#              #
+#    Updated: 2026/03/18 00:56:12 by aralves-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRCS =	main.c\
 		game/moving.c\
 		game/rotating.c\
 		game/direction_start.c\
+		helpers/texture_helper.c
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)

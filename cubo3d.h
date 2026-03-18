@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cubo3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdoutor- <jdoutor-@student.42lisboa.com>   #+#  +:+       +#+        */
+/*   By: aralves- <aralves-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-10-06 12:48:20 by jdoutor-          #+#    #+#             */
-/*   Updated: 2025-10-06 12:48:20 by jdoutor-         ###   ########.fr       */
+/*   Created: 2025/10/06 12:48:20 by jdoutor-          #+#    #+#             */
+/*   Updated: 2026/03/18 02:13:09 by aralves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,35 @@ typedef struct s_img
 	int		width;
 	int		height;
 }	t_img;
+
+typedef struct s_ray
+{
+	double	ray_pos_x;
+	double	ray_pos_y;
+	int		map_x;
+	int		map_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	double	perp_wall_dist;
+	int		wall_height;
+	int		start_y;
+	int		end_y;
+	int		y;
+	int		texx;
+	int		texy;
+	double	wallx;
+	double	step;
+	double	texpos;
+	int		texnum;
+	char	*dst;
+	int		color;
+}	t_ray;
 
 typedef struct game
 {
@@ -115,4 +144,5 @@ void	east(t_game *game);
 void	west(t_game *game);
 int		fill_var_cont(char **element, t_game *game);
 void	ready_to_fill(int fd, char *line, t_game *game);
+void	load_one_texture(t_game *game, int dir, char *path);
 #endif

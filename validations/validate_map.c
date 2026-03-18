@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdoutor- <jdoutor-@student.42lisboa.com>   #+#  +:+       +#+        */
+/*   By: aralves- <aralves-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-10-13 15:09:23 by jdoutor-          #+#    #+#             */
-/*   Updated: 2025-10-13 15:09:23 by jdoutor-         ###   ########.fr       */
+/*   Created: 2025/10/13 15:09:23 by jdoutor-          #+#    #+#             */
+/*   Updated: 2026/03/18 01:30:27 by aralves-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,33 +72,27 @@ static int	valid_space(t_game *game, int i, int j)
 	return (0);
 }
 
-static int	save_position(t_game *game, int i, int j)
+static int	save_p(t_game *game, int i, int j)
 {
 	if (game->map[i][j] == '0')
 		return (0);
 	if (game->start_orientation != 0)
 		return (-1);
-	if (game->map[i][j] == 'N')
+	if (game->map[i][j] == 'N' || game->map[i][j] == 'S')
 	{
-		game->start_orientation = 'N';
+		if (game->map[i][j] == 'N')
+			game->start_orientation = 'N';
+		else
+			game->start_orientation = 'S';
 		game->start_x = j;
 		game->start_y = i;
 	}
-	else if (game->map[i][j] == 'S')
+	else if (game->map[i][j] == 'E' || game->map[i][j] == 'W')
 	{
-		game->start_orientation = 'S';
-		game->start_x = j;
-		game->start_y = i;
-	}
-	else if (game->map[i][j] == 'E')
-	{
-		game->start_orientation = 'E';
-		game->start_x = j;
-		game->start_y = i;
-	}
-	else if (game->map[i][j] == 'W')
-	{
-		game->start_orientation = 'W';
+		if (game->map[i][j] == 'E')
+			game->start_orientation = 'E';
+		else
+			game->start_orientation = 'W';
 		game->start_x = j;
 		game->start_y = i;
 	}
@@ -111,7 +105,6 @@ int	validate_map(t_game *game)
 	int	j;
 
 	i = 1;
-	j = 1;
 	if (check_walls(game) == -1)
 		return (-1);
 	while (game->map[i] != 0)
@@ -123,8 +116,7 @@ int	validate_map(t_game *game)
 				|| game->map[i][j] == 'S' || game->map[i][j] == 'E'
 				|| game->map[i][j] == 'W')
 			{
-				if (valid_space(game, i, j) == -1
-					|| save_position(game, i, j) == -1)
+				if (valid_space(game, i, j) == -1 || save_p(game, i, j) == -1)
 					return (-1);
 			}
 			else if (game->map[i][j] != '1' && game->map[i][j] != ' ')
