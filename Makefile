@@ -42,7 +42,8 @@ SRCS =	main.c\
 		game/moving.c\
 		game/rotating.c\
 		game/direction_start.c\
-		helpers/texture_helper.c
+		helpers/texture_helper.c\
+		helpers/raycast_helper.c\
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)

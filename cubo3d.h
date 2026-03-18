@@ -149,4 +149,13 @@ int		check_top_left_walls(t_game *game);
 int		check_bottom_right_walls(t_game *game, int i);
 void	not_filled_close(int fd, t_game *game);
 int		no_start(t_game *game);
+void	perform_ray_marching(t_ray *ray, t_game *game);
+void	calculate_perpendicular_wall_dist(t_ray *ray, double ray_dir_x,
+			double ray_dir_y);
+void	calculate_wall_and_texture(t_ray *ray, double ray_dir_x,
+			double ray_dir_y);
+void	calculate_texture_coordinates(t_ray *ray, t_game *game,
+			double ray_dir_x, double ray_dir_y);
+void	draw_pixels(t_ray *ray, t_game *game, int screen_x);
+
 #endif
