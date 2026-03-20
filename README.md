@@ -44,5 +44,7 @@
 * Resources
 
 	https://harm-smits.github.io/42docs/libs/minilibx
+
 	https://ismailassil.medium.com/ray-casting-c-8bfae2c2fc13
+	
 	https://hackmd.io/@nszl/H1LXByIE2
