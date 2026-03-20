@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_resolution.c                                  :+:      :+:    :+:   */
+/*   fill_ceilling.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdoutor- <jdoutor-@student.42lisboa.com>   #+#  +:+       +#+        */
+/*   By: jdoutor- <jdoutor-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-10-06 16:25:54 by jdoutor-          #+#    #+#             */
-/*   Updated: 2025-10-06 16:25:54 by jdoutor-         ###   ########.fr       */
+/*   Created: 2025/10/06 16:25:54 by jdoutor-          #+#    #+#             */
+/*   Updated: 2026/03/20 15:17:15 by jdoutor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	fill_ceilling(char **element, t_game *game)
 {
 	char	**split;
 
+	split = 0;
 	if (game->c_r != -1 || game->c_g != -1 || game->c_b != -1)
 		return (-1);
 	if (element[1])

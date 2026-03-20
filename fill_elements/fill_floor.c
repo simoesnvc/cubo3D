@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_resolution.c                                  :+:      :+:    :+:   */
+/*   fill_floor.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdoutor- <jdoutor-@student.42lisboa.com>   #+#  +:+       +#+        */
+/*   By: jdoutor- <jdoutor-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-10-06 16:25:54 by jdoutor-          #+#    #+#             */
-/*   Updated: 2025-10-06 16:25:54 by jdoutor-         ###   ########.fr       */
+/*   Created: 2025/10/06 16:25:54 by jdoutor-          #+#    #+#             */
+/*   Updated: 2026/03/20 15:16:41 by jdoutor-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	fill_floor(char **element, t_game *game)
 {
 	char	**split;
 
+	split = 0;
 	if (game->f_r != -1 || game->f_g != -1 || game->f_b != -1)
 		return (-1);
 	if (element[1])

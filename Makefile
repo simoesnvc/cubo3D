@@ -3,24 +3,23 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aralves- <aralves-@student.42lisboa.com    +#+  +:+       +#+         #
+#    By: jdoutor- <jdoutor-@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/02 14:26:41 by jdoutor-          #+#    #+#              #
-#    Updated: 2026/03/18 00:56:12 by aralves-         ###   ########.fr        #
+#    Updated: 2026/03/20 15:39:17 by jdoutor-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-LIBCREATE = ar rc
 RM = rm -f
+
 LIBFT_DIR = libft
 MLX_PATH = mlx/
-MLX_LIB = $(MLX_PATH)libmlx.a
+
 MLX_FLAGS = -L$(MLX_PATH) -lmlx -lX11 -lXext -lXtst
 
-OBJS = $(SRCS:.c=.o)
 SRCS =	main.c\
 		initialization.c\
 		validations/validate_args.c\
@@ -43,27 +42,33 @@ SRCS =	main.c\
 		game/rotating.c\
 		game/direction_start.c\
 		helpers/texture_helper.c\
-		helpers/raycast_helper.c\
+		helpers/raycast_helper.c
 
-.c.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
-	
-$(NAME): $(OBJS)
-		make -C $(LIBFT_DIR)
-		cp libft/libft.a .
-	
-	$(CC) $(OBJS) $(LIBFT_DIR)/libft.a $(MLX_FLAGS) -lm -o $(NAME)
+OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $@
+
+mlx:
+	cd $(MLX_PATH) && ./configure && $(MAKE) all
+
+$(NAME): $(OBJS)
+	$(MAKE) mlx
+	$(MAKE) -C $(LIBFT_DIR)
+	$(CC) $(OBJS) $(LIBFT_DIR)/libft.a $(MLX_FLAGS) -lm -o $(NAME)
+
 clean:
-	$(RM) $(OBJS) $(BONUS_OBJ) libft.a
-	make -C $(LIBFT_DIR) clean
+	$(RM) $(OBJS)
+	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(MLX_PATH) clean
 
 fclean: clean
-	$(RM) $(NAME) libft.a
-	make -C $(LIBFT_DIR) fclean
+	$(RM) $(NAME)
+	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(MAKE) -C $(MLX_PATH) clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re mlx
